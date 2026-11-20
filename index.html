@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Green Vent — Installation Help &amp; Customer Support</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<script src="https://unpkg.com/lucide@0.460.0"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--gv-warm-white); color: var(--fg); }
+  img { display: block; max-width: 100%; }
+  a { text-decoration: none; }
+  .wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding-inline: 24px; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    font-family: var(--font-sans); font-weight: 700; font-size: var(--fs-16);
+    border: none; border-radius: var(--radius-pill); cursor: pointer;
+    padding: 15px 28px; line-height: 1; transition: background .18s ease-out, transform .1s ease-out, box-shadow .2s ease-out;
+  }
+  .btn-primary { background: var(--gv-green); color: #fff; }
+  .btn-primary:hover { background: var(--gv-green-dark); box-shadow: var(--shadow-green); }
+  .btn-primary:active { transform: scale(.985); }
+  .btn-ghost { background: transparent; color: var(--gv-green-dark); border: 1.5px solid var(--gv-ink-15); }
+  .btn-ghost:hover { background: var(--gv-green-08); border-color: var(--gv-sage); }
+  .btn-block { width: 100%; }
+  .btn-lg { padding: 18px 30px; font-size: var(--fs-18); }
+
+  /* ---------- Capsule / pill ---------- */
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gv-green); color: #fff;
+    font-weight: 600; text-transform: uppercase; letter-spacing: var(--tracking-wider);
+    font-size: var(--fs-12); padding: 8px 16px; border-radius: var(--radius-pill);
+  }
+  .pill-soft { background: var(--gv-green-08); color: var(--gv-green-dark); }
+
+  /* ---------- Header ---------- */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(244,241,235,.86); backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .nav .logo img { height: 40px; width: auto; }
+  .nav-links { display: flex; align-items: center; gap: 30px; }
+  .nav-links a { color: var(--gv-ink-70); font-weight: 600; font-size: var(--fs-16); transition: color .15s; }
+  .nav-links a:hover { color: var(--gv-green-dark); }
+  .nav-cta { display: flex; align-items: center; gap: 14px; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 64px 0 72px; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 460px; gap: 56px; align-items: start; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--gv-green); font-weight: 600;
+    text-transform: uppercase; letter-spacing: var(--tracking-wider); font-size: var(--fs-12); margin-bottom: 18px; }
+  .hero h1 { font-size: clamp(2.4rem, 1.6rem + 2.6vw, 3.4rem); line-height: 1.06; letter-spacing: -.02em; margin: 0 0 18px; }
+  .hero h1 .accent { color: var(--gv-green); }
+  .hero-sub { font-size: var(--fs-20); line-height: 1.5; color: var(--gv-ink-70); max-width: 520px; margin: 0 0 28px; }
+  .trust-row { display: flex; flex-wrap: wrap; gap: 12px 14px; margin-top: 30px; }
+  .trust-chip { display: inline-flex; align-items: center; gap: 9px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--radius-pill); padding: 10px 16px;
+    font-weight: 600; font-size: var(--fs-14); color: var(--gv-ink-70); box-shadow: var(--shadow-xs); }
+  .trust-chip svg { color: var(--gv-green); width: 18px; height: 18px; }
+
+  .hero-stats { display: flex; gap: 34px; margin-top: 40px; }
+  .stat .num { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-48); color: var(--gv-green-dark); line-height: 1; letter-spacing: -.01em; }
+  .stat .lab { font-size: var(--fs-14); color: var(--fg-muted); margin-top: 6px; }
+
+  /* ---------- Form card ---------- */
+  .form-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg); padding: 32px; position: sticky; top: 100px; }
+  .form-card h2 { font-size: var(--fs-24); margin: 0 0 4px; }
+  .form-card .lead { font-size: var(--fs-14); color: var(--fg-muted); margin: 0 0 22px; }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-weight: 600; font-size: var(--fs-14); margin-bottom: 7px; color: var(--gv-ink-70); }
+  .field label .req { color: var(--gv-green); }
+  .field input, .field select, .field textarea {
+    width: 100%; font-family: var(--font-sans); font-size: var(--fs-16); color: var(--fg);
+    padding: 13px 15px; border: 1.5px solid var(--border-strong); border-radius: var(--radius-md);
+    background: var(--gv-warm-white); transition: border-color .15s, box-shadow .15s; }
+  .field input::placeholder { color: var(--gv-ink-30); }
+  .field textarea { resize: vertical; min-height: 96px; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--gv-green);
+    box-shadow: 0 0 0 3px var(--gv-green-14); background: #fff; }
+  .field.invalid input, .field.invalid select { border-color: #C0492F; box-shadow: 0 0 0 3px rgba(192,73,47,.12); }
+  .err-msg { display: none; color: #C0492F; font-size: var(--fs-12); margin-top: 5px; font-weight: 600; }
+  .field.invalid .err-msg { display: block; }
+  .form-foot { display: flex; align-items: center; gap: 9px; margin-top: 14px; color: var(--fg-muted); font-size: var(--fs-12); }
+  .form-foot svg { width: 15px; height: 15px; color: var(--gv-sage); flex: none; }
+
+  .form-success { display: none; text-align: center; padding: 18px 6px 8px; }
+  .form-success.show { display: block; }
+  .form-success .ic { width: 76px; height: 76px; margin: 0 auto 18px; border-radius: 50%;
+    background: var(--gv-green-08); display: grid; place-items: center; }
+  .form-success .ic svg { width: 40px; height: 40px; color: var(--gv-green); }
+  .form-success h3 { font-size: var(--fs-24); margin: 0 0 8px; }
+  .form-success p { color: var(--gv-ink-70); margin: 0 0 20px; }
+  .form-body.hide { display: none; }
+
+  /* ---------- Section scaffolding ---------- */
+  section.block { padding: 84px 0; }
+  .sec-head { text-align: center; max-width: 680px; margin: 0 auto 52px; }
+  .sec-head .pill { margin-bottom: 18px; }
+  .sec-head h2 { font-size: clamp(1.8rem, 1.3rem + 1.8vw, 2.6rem); margin: 0 0 14px; letter-spacing: -.01em; }
+  .sec-head p { font-size: var(--fs-18); color: var(--gv-ink-70); margin: 0; }
+
+  /* ---------- Help triage cards ---------- */
+  .triage { background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .triage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .tri-card { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px;
+    background: var(--surface-soft); transition: transform .2s ease-out, box-shadow .2s ease-out; }
+  .tri-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .tri-ic { width: 52px; height: 52px; border-radius: var(--radius-md); background: var(--gv-green); display: grid; place-items: center; margin-bottom: 18px; }
+  .tri-ic svg { width: 26px; height: 26px; color: #fff; }
+  .tri-card h3 { font-size: var(--fs-20); margin: 0 0 8px; }
+  .tri-card p { font-size: var(--fs-16); color: var(--gv-ink-70); margin: 0 0 16px; }
+  .tri-link { color: var(--gv-green); font-weight: 700; font-size: var(--fs-14); display: inline-flex; align-items: center; gap: 6px; }
+  .tri-link svg { width: 16px; height: 16px; transition: transform .15s; }
+  .tri-card:hover .tri-link svg { transform: translateX(3px); }
+
+  /* ---------- Install steps ---------- */
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .step-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    overflow: hidden; box-shadow: var(--shadow-sm); transition: transform .2s ease-out, box-shadow .2s ease-out; }
+  .step-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .step-photo { aspect-ratio: 1 / 1; width: 100%; object-fit: cover; background: var(--gv-warm-white); }
+  .step-body { padding: 22px 24px 26px; }
+  .step-badge { display: inline-block; background: var(--gv-green); color: #fff; font-weight: 700;
+    text-transform: uppercase; letter-spacing: var(--tracking-wide); font-size: var(--fs-12);
+    padding: 6px 14px; border-radius: var(--radius-pill); margin-bottom: 12px; }
+  .step-body h3 { font-size: var(--fs-20); margin: 0 0 8px; }
+  .step-body p { font-size: var(--fs-16); color: var(--gv-ink-70); margin: 0; }
+  .install-note { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+    margin-top: 44px; background: var(--gv-green-08); border: 1px solid var(--gv-green-14);
+    border-radius: var(--radius-lg); padding: 20px 28px; }
+  .install-note p { margin: 0; font-weight: 600; color: var(--gv-green-dark); font-size: var(--fs-18); }
+  .install-note svg { color: var(--gv-green); width: 22px; height: 22px; }
+
+  /* ---------- Tools / what's in the box ---------- */
+  .tools-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+  .tools-grid .ph { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-md); }
+  .tools-grid .ph img { width: 100%; border-radius: var(--radius-lg); }
+  .tool-list { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 14px; }
+  .tool-list li { display: flex; align-items: center; gap: 13px; font-size: var(--fs-18); color: var(--gv-ink-70); }
+  .tool-list li svg { width: 22px; height: 22px; color: var(--gv-green); flex: none; }
+  .warn { display: flex; gap: 14px; margin-top: 26px; background: #FBF3E7; border: 1px solid #EAD9BE;
+    border-radius: var(--radius-md); padding: 16px 18px; }
+  .warn svg { color: #B8842B; width: 22px; height: 22px; flex: none; margin-top: 2px; }
+  .warn p { margin: 0; font-size: var(--fs-16); color: #7A5A1E; }
+  .warn b { color: #5C4314; }
+
+  /* ---------- Videos ---------- */
+  .videos { background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .video-card { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;
+    background: var(--surface-soft); box-shadow: var(--shadow-sm); cursor: pointer;
+    transition: transform .2s ease-out, box-shadow .2s ease-out; }
+  .video-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .video-thumb { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--gv-charcoal); }
+  .video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease-out; }
+  .video-card:hover .video-thumb img { transform: scale(1.04); }
+  .video-thumb::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(28,28,28,0) 40%, rgba(28,28,28,.45)); }
+  .play { position: absolute; inset: 0; margin: auto; width: 66px; height: 66px; border-radius: 50%;
+    background: rgba(255,255,255,.92); display: grid; place-items: center; z-index: 2; transition: transform .18s ease-out, background .18s; box-shadow: var(--shadow-md); }
+  .video-card:hover .play { transform: scale(1.08); background: #fff; }
+  .play svg { width: 28px; height: 28px; color: var(--gv-green); margin-left: 3px; }
+  .video-dur { position: absolute; right: 12px; bottom: 12px; z-index: 2; color: #fff; font-size: var(--fs-12);
+    font-weight: 600; background: rgba(28,28,28,.7); padding: 4px 9px; border-radius: var(--radius-xs); }
+  .video-meta { padding: 20px 22px 24px; }
+  .video-meta .vlabel { font-size: var(--fs-12); font-weight: 600; text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--gv-green); }
+  .video-meta h3 { font-size: var(--fs-20); margin: 7px 0 0; }
+
+  /* video modal */
+  .v-modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center;
+    background: rgba(28,28,28,.82); padding: 24px; }
+  .v-modal.show { display: flex; }
+  .v-modal .frame { width: min(960px, 100%); aspect-ratio: 16/9; background: #000; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); }
+  .v-modal iframe { width: 100%; height: 100%; border: 0; }
+  .v-close { position: absolute; top: 22px; right: 26px; background: rgba(255,255,255,.14); border: none; color: #fff;
+    width: 46px; height: 46px; border-radius: 50%; cursor: pointer; display: grid; place-items: center; transition: background .15s; }
+  .v-close:hover { background: rgba(255,255,255,.28); }
+  .v-empty { color: #fff; text-align: center; }
+
+  /* ---------- Applies-to chip ---------- */
+  .applies { display: inline-flex; align-items: center; gap: 8px; margin: 16px auto 0;
+    background: var(--gv-sage-20); border: 1px solid var(--gv-sage-40); color: var(--gv-green-dark);
+    font-weight: 700; font-size: var(--fs-14); padding: 8px 16px; border-radius: var(--radius-pill); }
+  .applies svg { width: 16px; height: 16px; color: var(--gv-green); }
+  .applies b { font-weight: 800; }
+
+  /* ---------- Playlist (YouTube) button ---------- */
+  .btn-yt { background: #fff; color: var(--gv-green-dark); border: 1.5px solid var(--gv-ink-15); }
+  .btn-yt:hover { background: var(--gv-green-08); border-color: var(--gv-sage); }
+  .btn-yt .yt-ic { display: grid; place-items: center; width: 26px; height: 18px; border-radius: 4px; background: #FF0000; }
+  .btn-yt .yt-ic svg { width: 13px; height: 13px; color: #fff; }
+  .hero-cta-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+
+  /* ---------- Marketplace strip ---------- */
+  .market { background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .market .wrap { display: flex; align-items: center; justify-content: center; gap: 16px 40px; flex-wrap: wrap; padding-block: 28px; }
+  .market-label { font-size: var(--fs-14); font-weight: 700; text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--fg-muted); }
+  .market-logos { display: flex; align-items: center; gap: 14px 34px; flex-wrap: wrap; justify-content: center; }
+  .m-logo { font-family: var(--font-sans); font-weight: 800; font-size: 23px; letter-spacing: -.025em;
+    color: var(--gv-ink-50); line-height: 1; transition: color .18s ease-out, transform .18s ease-out; }
+  .m-logo:hover { transform: translateY(-2px); color: var(--brand, var(--gv-charcoal)); }
+  .m-ebay span:nth-child(1){color:#E53238;} .m-ebay span:nth-child(2){color:#0064D2;}
+  .m-ebay span:nth-child(3){color:#F5AF02;} .m-ebay span:nth-child(4){color:#86B817;}
+  .m-ebay { opacity:.55; transition: opacity .18s ease-out, transform .18s ease-out; }
+  .m-ebay:hover { opacity:1; }
+
+  /* ---------- Other product lines ---------- */
+  .lines { background: var(--gv-warm-white); }
+  .lines-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 900px) { .lines-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .lines-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- FAQ ---------- */
+  .faq-wrap { max-width: 820px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border-strong); }
+  .faq-q { width: 100%; background: none; border: none; cursor: pointer; text-align: left;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    padding: 24px 4px; font-family: var(--font-sans); font-weight: 700; font-size: var(--fs-18); color: var(--gv-charcoal); }
+  .faq-q .chev { width: 24px; height: 24px; color: var(--gv-green); flex: none; transition: transform .25s ease; }
+  .faq-item.open .chev { transform: rotate(180deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+  .faq-a p { margin: 0 4px 24px; color: var(--gv-ink-70); font-size: var(--fs-16); line-height: 1.6; }
+
+  /* ---------- Support CTA ---------- */
+  .support { background: var(--gv-green); color: #fff; }
+  .support-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: center; }
+  .support h2 { color: #fff; font-size: clamp(1.9rem, 1.4rem + 2vw, 2.8rem); margin: 0 0 16px; letter-spacing: -.01em; }
+  .support p.lead { color: rgba(255,255,255,.9); font-size: var(--fs-20); margin: 0 0 30px; max-width: 460px; }
+  .support-ways { display: grid; gap: 16px; }
+  .way { display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius-lg); padding: 18px 22px; }
+  .way .wic { width: 46px; height: 46px; border-radius: var(--radius-md); background: rgba(255,255,255,.16); display: grid; place-items: center; flex: none; }
+  .way .wic svg { width: 22px; height: 22px; color: #fff; }
+  .way .wt { font-size: var(--fs-12); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: rgba(255,255,255,.7); font-weight: 600; }
+  .way .wv { font-size: var(--fs-18); font-weight: 700; color: #fff; margin-top: 2px; }
+  .way a { color: #fff; }
+  .mascot-frame { text-align: center; }
+  .windy-badge { max-width: 330px; margin: 0 auto; background: var(--gv-warm-white);
+    border: 1.5px solid var(--gv-sage); border-radius: var(--radius-2xl); overflow: hidden; box-shadow: var(--shadow-lg); }
+  .windy-badge img { width: 100%; display: block; }
+  .mascot-frame .cap { color: #fff; font-weight: 700; font-size: var(--fs-20); margin-top: 8px; }
+  .mascot-frame .sub { color: rgba(255,255,255,.82); font-size: var(--fs-14); margin-top: 4px; }
+
+  /* ---------- Footer ---------- */
+  footer.site { background: var(--gv-warm-white); color: var(--gv-ink-70); padding: 54px 0 40px; border-top: 1px solid var(--border); }
+  .foot-grid { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+  footer.site img.flogo { height: 40px; margin-bottom: 16px; }
+  footer.site p { color: var(--fg-muted); font-size: var(--fs-14); margin: 0; max-width: 320px; line-height: 1.6; }
+  .foot-links { display: flex; gap: 56px; flex-wrap: wrap; }
+  .foot-col h4 { color: var(--gv-green-dark); font-size: var(--fs-14); text-transform: uppercase; letter-spacing: var(--tracking-wide); margin: 0 0 14px; }
+  .foot-col a { display: block; color: var(--gv-ink-70); font-size: var(--fs-14); margin-bottom: 10px; transition: color .15s; }
+  .foot-col a:hover { color: var(--gv-green-dark); }
+  .foot-bottom { border-top: 1px solid var(--border-strong); margin-top: 40px; padding-top: 24px;
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: var(--fs-12); color: var(--gv-ink-50); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .form-card { position: static; max-width: 560px; }
+    .triage-grid, .steps-grid, .video-grid { grid-template-columns: 1fr 1fr; }
+    .tools-grid, .support-grid { grid-template-columns: 1fr; gap: 36px; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 640px) {
+    .triage-grid, .steps-grid, .video-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+    .nav-cta .btn-ghost { display: none; }
+    section.block { padding: 60px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =======================================================================
+     GOOGLE FORM SETUP  (so customer submissions sync automatically)
+     -----------------------------------------------------------------------
+     1. Create a Google Form with 5 short-answer questions in this order:
+        Full Name · Email · Order Number · Product · How can we help?
+     2. Click the 3-dot menu > "Get pre-filled link", fill dummy values, Submit.
+     3. From the generated URL copy each field's entry ID (entry.123456789)
+        and the form ID (the long code in /d/e/XXXX/viewform).
+     4. Paste them into GV_CONFIG below. That's it — submissions flow straight
+        into the linked Google Sheet. Leave blank to run in safe demo mode.
+     ======================================================================= -->
+<script>
+  const GV_CONFIG = {
+    googleForm: {
+      formId: "1FAIpQLSepvgCO1aiSt4xCnV_2A5AuPhj1Cn_x0VZWQv6Y9XL2hom5LA",
+      entries: {
+        name:    "entry.529550695",
+        email:   "entry.288440162",
+        order:   "entry.1342574313",
+        product: "entry.2029115301",
+        topic:   "entry.2015170672"
+      }
+    },
+    // YouTube video IDs — paste your install videos here (just the ID after watch?v=)
+    videos: {
+      wall:        "_pZ3hEeWx_E",   // Wall / Ceiling — Modern Air Vent Cover
+      floor:       "J_-6ukHzwUU",   // Floor Register
+      linear:      "ktrlyiyoUcc",   // Slim Design Slot Diffuser (main install guide)
+      returnGrille:"DWjYQT3clYI",   // Air Return Grille
+      alumFloor:   "TNXF-JuAXL8",   // Aluminum Floor Register
+      twoWayFloor: "J414TAHCVZM",   // 2 Way Floor Register
+      twoWayHvac:  "FS_AoIoOpk8",   // 2 Way HVAC Register
+      acCover:     "SCpMqF8J3no"    // Air Conditioner Cover
+    },
+    // Link to your YouTube playlist (paste the full playlist URL)
+    playlistUrl: "https://youtube.com/playlist?list=PLNvF4YhvnBiKAdgKmnFRm7t2fMyyreqfO&si=vXz6mbwn0rd_V9tX",
+    // Your storefront links on each marketplace (paste full URLs)
+    stores: {
+      amazon:  "https://www.amazon.com/stores/GREENVENT/page/6C968DF8-DB8E-4FC6-B8CF-2FFE6A552597?lp_asin=B0GGB2ZSYX&ref_=ast_bln&store_ref=bl_ast_dp_brandlogo_sto",
+      walmart: "https://www.walmart.com/seller/103036812/cp/shopall",
+      etsy:    "https://www.etsy.com/shop/GreenVent",
+      ebay:    "https://www.ebay.com/sch/i.html?_nkw=green+vent+air+vent+cover&_sacat=0&_from=R40&_trksid=m570.l1313&LH_TitleDesc=0&_odkw=green+vent+air+vent+cover&_osacat=0",
+      wayfair: "https://www.wayfair.com/keyword.php?keyword=green+vent+air+vent+cover",
+      shop:    "https://shop.app/m/62bdyvur37?dynamicFilterVAvailability=%7B%22available%22%3Atrue%7D&inStock=true&utm_source=shop_app&sortBy=MOST_SALES"
+    },
+    support: { email: "support@greenvent.us", hours: "Mon–Fri · 9am–6pm ET" },
+    // Web3Forms: each submission is emailed to support@greenvent.us (empty key = off)
+    web3forms: { accessKey: "" }
+  };
+</script>
+
+<!-- ============================ HEADER ============================ -->
+<header class="site">
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Green Vent home"><img src="assets/logo-greenvent.png" alt="Green Vent"></a>
+    <nav class="nav-links">
+      <a href="#install">Install Guide</a>
+      <a href="#videos">Videos</a>
+      <a href="#faq">FAQ</a>
+      <a href="#support">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="#videos">Watch Install Video</a>
+      <a class="btn btn-primary" href="#help">Get Support</a>
+    </div>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow"><i data-lucide="life-buoy"></i> Installation Help &amp; Customer Care</div>
+      <h1>Your vent, installed in <span class="accent">15 minutes</span>. Help here if you need it.</h1>
+      <p class="hero-sub">A screwdriver, four screws, and this page. Follow the step-by-step guide, watch the video, or send us your order — our team replies within 24 hours.</p>
+
+      <div class="trust-row">
+        <span class="trust-chip"><i data-lucide="circle-check"></i> No-hassle support</span>
+        <span class="trust-chip"><i data-lucide="clock"></i> 24-hour reply</span>
+        <span class="trust-chip"><i data-lucide="shield-check"></i> Lifetime guidance</span>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat"><div class="num">15min</div><div class="lab">Average install time</div></div>
+        <div class="stat"><div class="num">4</div><div class="lab">Screws, that's it</div></div>
+        <div class="stat"><div class="num">&lt;24h</div><div class="lab">Support response</div></div>
+      </div>
+
+      <div class="hero-cta-row">
+        <a class="btn btn-yt btn-lg" id="playlistBtn" href="https://www.youtube.com/@greenvent" target="_blank" rel="noopener">
+          <span class="yt-ic"><i data-lucide="play"></i></span> Watch "Home Makeover Ideas with Green Vent"
+        </a>
+      </div>
+    </div>
+
+    <!-- FORM CARD -->
+    <div class="form-card" id="help">
+      <div class="form-body" id="formBody">
+        <h2>Get installation help</h2>
+        <p class="lead">Tell us about your order and we'll get you set up fast.</p>
+        <form id="supportForm" novalidate>
+          <div class="field" id="f-name">
+            <label for="name">Full name <span class="req">*</span></label>
+            <input type="text" id="name" name="name" placeholder="Jane Doe" autocomplete="name">
+            <span class="err-msg">Please enter your name.</span>
+          </div>
+          <div class="field" id="f-email">
+            <label for="email">Email <span class="req">*</span></label>
+            <input type="email" id="email" name="email" placeholder="jane@email.com" autocomplete="email">
+            <span class="err-msg">Please enter a valid email.</span>
+          </div>
+          <div class="field" id="f-order">
+            <label for="order">Order number <span class="req">*</span></label>
+            <input type="text" id="order" name="order" placeholder="e.g. 112-3456789-1011" autocomplete="off">
+            <span class="err-msg">Please enter your order number.</span>
+          </div>
+          <div class="field" id="f-product">
+            <label for="product">Product</label>
+            <select id="product" name="product">
+              <option value="">Select your product…</option>
+              <option>Linear Slot Diffuser</option>
+              <option>Air Return Grille</option>
+              <option>Aluminum Floor Register</option>
+              <option>2 Way Floor Register</option>
+              <option>2 Way HVAC Register</option>
+              <option>Air Conditioner Cover</option>
+              <option>Not Sure</option>
+            </select>
+          </div>
+          <div class="field" id="f-topic">
+            <label for="topic">How can we help?</label>
+            <select id="topic" name="topic">
+              <option value="">Choose a topic…</option>
+              <option>Installation help</option>
+              <option>Wrong size / sizing question</option>
+              <option>Missing parts</option>
+              <option>Damaged item</option>
+              <option>Warranty / replacement</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field" id="f-message">
+            <label for="message">Tell us more (optional)</label>
+            <textarea id="message" name="message" rows="4" placeholder="What's going on? Size, room, what you need help with…"></textarea>
+          </div>
+          <input type="checkbox" name="botcheck" id="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+          <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:8px">Submit &amp; Get Support</button>
+          <div class="form-foot"><i data-lucide="lock"></i> Your details are only used to resolve your request. No spam, ever.</div>
+        </form>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <div class="ic"><i data-lucide="check"></i></div>
+        <h3>You're all set!</h3>
+        <p>Thanks — we've logged your request and our team will reply within 24 hours. While you wait, watch the install video below.</p>
+        <a href="#videos" class="btn btn-primary btn-block">Watch the Install Video</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MARKETPLACE STRIP ============================ -->
+<section class="market" style="line-height: 0.5">
+  <div class="wrap">
+    <span class="market-label">Shop Green Vent on</span>
+    <div class="market-logos">
+      <a class="m-logo m-amazon" id="store-amazon" href="#" target="_blank" rel="noopener" style="--brand:#FF9900">Amazon</a>
+      <a class="m-logo m-walmart" id="store-walmart" href="#" target="_blank" rel="noopener" style="--brand:#0071DC">Walmart</a>
+      <a class="m-logo m-etsy" id="store-etsy" href="#" target="_blank" rel="noopener" style="--brand:#F16521">Etsy</a>
+      <a class="m-logo m-ebay" id="store-ebay" href="#" target="_blank" rel="noopener" aria-label="eBay"><span>e</span><span>b</span><span>a</span><span>y</span></a>
+      <a class="m-logo m-wayfair" id="store-wayfair" href="#" target="_blank" rel="noopener" style="--brand:#7F187F">Wayfair</a>
+      <a class="m-logo m-shop" id="store-shop" href="#" target="_blank" rel="noopener" style="--brand:#5433EB">Shop</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TRIAGE ============================ -->
+<section class="block triage">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill">Three ways we help</span>
+      <h2>Pick the fastest path to a finished install</h2>
+      <p>Most homeowners are done before the coffee's cold. Here's where to start.</p>
+    </div>
+    <div class="triage-grid">
+      <div class="tri-card">
+        <div class="tri-ic"><i data-lucide="list-checks"></i></div>
+        <h3>Follow the steps</h3>
+        <p>Six clear steps with photos — from marking the holes to snapping it in place.</p>
+        <a class="tri-link" href="#install">See the guide <i data-lucide="arrow-right"></i></a>
+      </div>
+      <div class="tri-card">
+        <div class="tri-ic"><i data-lucide="play"></i></div>
+        <h3>Watch the video</h3>
+        <p>Prefer to watch? A short, narrated walkthrough for each product type.</p>
+        <a class="tri-link" href="#videos">Watch now <i data-lucide="arrow-right"></i></a>
+      </div>
+      <div class="tri-card">
+        <div class="tri-ic"><i data-lucide="messages-square"></i></div>
+        <h3>Talk to a human</h3>
+        <p>Stuck, missing a part, or unsure on sizing? Send your order — we reply fast.</p>
+        <a class="tri-link" href="#help">Get support <i data-lucide="arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TOOLS / IN THE BOX ============================ -->
+<section class="block" style="background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap tools-grid">
+    <div class="ph"><img src="assets/product-main-DLS-146N.jpg" alt="Green Vent Modern Air Vent Cover with included screws and tool"></div>
+    <div>
+      <span class="pill pill-soft">What's in the box</span>
+      <h2 style="margin:18px 0 6px;font-size:clamp(1.7rem,1.3rem+1.6vw,2.4rem)">Everything you need is already included</h2>
+      <p style="font-size:var(--fs-18);color:var(--gv-ink-70);margin:0">Open the box, grab a drill, and you're ready. No trips to the hardware store.</p>
+      <span class="applies" style="margin-left:0"><i data-lucide="badge-check"></i> Applies to <b>Linear Slot Diffuser</b></span>
+      <ul class="tool-list">
+        <li><i data-lucide="circle-check"></i> Aluminum vent cover — rust-proof, powder-coated white</li>
+        <li><i data-lucide="circle-check"></i> 4–5 matching screws, pre-counted</li>
+        <li><i data-lucide="circle-check"></i> Alignment tool for clean louver spacing</li>
+        <li><i data-lucide="circle-check"></i> Quick-start card with a link to this page</li>
+      </ul>
+      <div class="warn">
+        <i data-lucide="ruler"></i>
+        <p><b>Sizing tip:</b> Always measure your <b>duct opening</b> — not the old faceplate. Unsure? Send us a photo through the support form and we'll confirm your size.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ INSTALL STEPS ============================ -->
+<section class="block" id="install">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill">How to Install</span>
+      <h2 style="width: 680px">From box to finished wall/ceiling in six steps</h2>
+      <p>No special tools. Just a marker, a drill, and the screws in your box.</p>
+      <span class="applies"><i data-lucide="badge-check"></i> Applies to <b>Linear Slot Diffuser</b></span>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <img class="step-photo" src="assets/step-1.jpg" alt="Marking the screw hole locations">
+        <div class="step-body"><span class="step-badge">Step 1</span><h3>Mark the screw holes</h3><p>Hold the vent in place and mark where each screw will go.</p></div>
+      </div>
+      <div class="step-card">
+        <img class="step-photo" src="assets/step-2.jpg" alt="Four marked spots on the duct opening">
+        <div class="step-body"><span class="step-badge">Step 2</span><h3>You'll have 4 spots</h3><p>Four marks in total — one near each corner of the opening.</p></div>
+      </div>
+      <div class="step-card">
+        <img class="step-photo" src="assets/step-3.jpg" alt="Drilling small pilot holes">
+        <div class="step-body"><span class="step-badge">Step 3</span><h3>Drill small pilot holes</h3><p>Carefully drill a small hole at each of the four marks.</p></div>
+      </div>
+      <div class="step-card">
+        <img class="step-photo" src="assets/step-4.jpg" alt="Placing the vent back on the wall">
+        <div class="step-body"><span class="step-badge">Step 4</span><h3>Place the vent back</h3><p>Line the vent up in the same position over the opening.</p></div>
+      </div>
+      <div class="step-card">
+        <img class="step-photo" src="assets/step-5.jpg" alt="Securing the vent with screws">
+        <div class="step-body"><span class="step-badge">Step 5</span><h3>Screw it in securely</h3><p>Drive a screw into each pilot hole until the vent sits flush.</p></div>
+      </div>
+      <div class="step-card">
+        <img class="step-photo" src="assets/step-6.jpg" alt="Adjusting the finished vent louvers">
+        <div class="step-body"><span class="step-badge">Done</span><h3>Set your airflow</h3><p>Slide the louvers to aim the air. That's it — you're done.</p></div>
+      </div>
+    </div>
+    <div class="install-note">
+      <i data-lucide="play-circle"></i>
+      <p>Prefer to watch it done? We filmed every step for you.</p>
+      <a class="btn btn-primary" href="#videos">Watch the Video</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ VIDEOS ============================ -->
+<section class="block videos" id="videos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill">Video Tutorials</span>
+      <h2>Watch the install, start to finish</h2>
+      <p>Short, narrated walkthroughs for each product. Pick the one that matches your vent.</p>
+    </div>
+    <div class="video-grid">
+      <div class="video-card" data-video="wall">
+        <div class="video-thumb"><img src="assets/step-1.jpg" alt="Wall and ceiling vent cover install video">
+          <span class="play"><i data-lucide="play"></i></span><span class="video-dur">3:20</span></div>
+        <div class="video-meta"><span class="vlabel">Wall / Ceiling</span><h3>Standard Linear Slot Diffuser</h3></div>
+      </div>
+      <div class="video-card" data-video="floor">
+        <div class="video-thumb"><img src="assets/step-4.jpg" alt="Floor register install video">
+          <span class="play"><i data-lucide="play"></i></span><span class="video-dur">2:45</span></div>
+        <div class="video-meta"><span class="vlabel">Floor</span><h3>Standard Linear Slot Diffuser</h3></div>
+      </div>
+      <div class="video-card" data-video="linear">
+        <div class="video-thumb"><img src="assets/step-6.jpg" alt="Slim design slot diffuser install video">
+          <span class="play"><i data-lucide="play"></i></span><span class="video-dur">4:10</span></div>
+        <div class="video-meta"><span class="vlabel">Wall / Ceiling</span><h3>Slim Design Slot Diffuser</h3></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OTHER PRODUCT LINES ============================ -->
+<section class="block lines" id="other-products">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill">More Install Videos</span>
+      <h2>Guides for our other product lines</h2>
+      <p>Got a different Green Vent product? Pick yours below and watch the install.</p>
+    </div>
+    <div class="lines-grid">
+      <div class="video-card" data-video="returnGrille">
+        <div class="video-thumb"><img src="assets/step-2.jpg" alt="Air Return Grille install video">
+          <span class="play"><i data-lucide="play"></i></span><span class="video-dur">3:05</span></div>
+        <div class="video-meta"><span class="vlabel">For Return Air</span><h3>Air Return Grille</h3></div>
+      </div>
+      <div class="video-card" data-video="alumFloor">
+        <div class="video-thumb"><img src="assets/step-4.jpg" alt="Aluminum Floor Register install video">
+          <span class="play"><i data-lucide="play"></i></span><span class="video-dur">2:40</span></div>
+        <div class="video-meta"><span class="vlabel">For Floor</span><h3>Aluminum Floor Register</h3></div>
+      </div>
+      <div class="video-card" data-video="twoWayFloor">
+        <div class="video-thumb"><img src="assets/step-5.jpg" alt="2 Way Floor Register install video">
+          <span class="play"><i data-lucide="play"></i></span><span class="video-dur">2:55</span></div>
+        <div class="video-meta"><span class="vlabel">For Floor</span><h3>2 Way Steel Floor Register</h3></div>
+      </div>
+      <div class="video-card" data-video="twoWayHvac">
+        <div class="video-thumb"><img src="assets/step-3.jpg" alt="2 Way HVAC Register install video">
+          <span class="play"><i data-lucide="play"></i></span><span class="video-dur">3:15</span></div>
+        <div class="video-meta"><span class="vlabel">For Wall / Ceiling</span><h3>2 Way Steel HVAC Register</h3></div>
+      </div>
+      <div class="video-card" data-video="acCover">
+        <div class="video-thumb"><img src="assets/step-6.jpg" alt="Air Conditioner Cover install video">
+          <span class="play"><i data-lucide="play"></i></span><span class="video-dur">2:30</span></div>
+        <div class="video-meta"><span class="vlabel">For Outdoor</span><h3>Air Conditioner Cover</h3></div>
+      </div>
+      <a class="video-card" id="channelLink" href="https://www.youtube.com/@greenvent" target="_blank" rel="noopener" style="text-decoration:none">
+        <div class="video-thumb" style="background:var(--gv-green);display:grid;place-items:center">
+          <span class="play" style="position:static;margin:0"><i data-lucide="monitor-play"></i></span></div>
+        <div class="video-meta"><span class="vlabel">YouTube</span><h3>See all on our channel</h3></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FAQ ============================ -->
+<section class="block" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill">Common Questions</span>
+      <h2>Quick answers before you call</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item">
+        <button class="faq-q">What size do I order? <i data-lucide="chevron-down" class="chev"></i></button>
+        <div class="faq-a"><p>Measure the duct opening in the wall/ceiling or floor — width first, then height — not the old faceplate. The faceplate is always larger than the hole. If you're between sizes or unsure, send a photo through the support form and we'll confirm the right fit.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do I need special tools? <i data-lucide="chevron-down" class="chev"></i></button>
+        <div class="faq-a"><p>No. A drill (or screwdriver) and the screws already in your box are all you need. The alignment tool is included too. Most installs take about 15 minutes.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">My box is missing screws or a part. What now? <i data-lucide="chevron-down" class="chev"></i></button>
+        <div class="faq-a"><p>We'll ship the missing parts free. Just submit your order number through the support form above and select "Missing parts" — we'll have a replacement on the way.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Will it rust like my old steel vent? <i data-lucide="chevron-down" class="chev"></i></button>
+        <div class="faq-a"><p>No. Green Vent covers are lightweight aluminum with a white powder-coat finish — rust-proof and built to last a decade, even in bathrooms and kitchens.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">The vent doesn't sit flush. How do I fix it? <i data-lucide="chevron-down" class="chev"></i></button>
+        <div class="faq-a"><p>Usually one screw is a touch tight or the opening has a burr. Back the screws out slightly, reseat the vent evenly, then tighten in a cross pattern. Still uneven? Send us a photo and we'll walk you through it.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What's covered under warranty? <i data-lucide="chevron-down" class="chev"></i></button>
+        <div class="faq-a"><p>Every Green Vent product is covered against manufacturing defects. If anything arrives damaged or fails in normal use, submit your order with "Warranty / replacement" and we'll make it right.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SUPPORT CTA ============================ -->
+<section class="block support" id="support">
+  <div class="wrap support-grid">
+    <div>
+      <span class="pill" style="background:rgba(255,255,255,.16)">We're real people</span>
+      <h2 style="margin-top:18px">Still stuck? We'll get you sorted.</h2>
+      <p class="lead">Send your order through the form and a Green Vent specialist will reply within 24 hours — or reach us directly below.</p>
+      <div class="support-ways">
+        <div class="way">
+          <div class="wic"><i data-lucide="mail"></i></div>
+          <div><div class="wt">Email us</div><div class="wv"><a id="sEmail" href="#">support@greenvent.us</a></div></div>
+        </div>
+        <div class="way">
+          <div class="wic"><i data-lucide="clock"></i></div>
+          <div><div class="wt">Support hours</div><div class="wv" id="sHours">Mon–Fri · 9am–6pm ET</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mascot-frame">
+      <div class="windy-badge"><img src="assets/mascot-windy-clean.png" alt="Windy, the Green Vent air companion, giving a thumbs up"></div>
+      <div class="cap">Windy's got your back</div>
+      <div class="sub">Friendly help, every step of the way.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img class="flogo" src="assets/logo-greenvent.png" alt="Green Vent">
+        <p>Professional ventilation solutions for American homes. Aluminum, rust-proof, and built to last.</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h4>Support</h4>
+          <a href="#help">Get Support</a>
+          <a href="#install">Install Guide</a>
+          <a href="#videos">Video Tutorials</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="foot-col">
+          <h4>Products</h4>
+          <a href="#">Linear Slot Diffuser</a>
+          <a href="#">Air Return Grille</a>
+          <a href="#">Floor Register</a>
+          <a href="#">Air Conditioner Cover</a>
+        </div>
+        <div class="foot-col">
+          <h4>Company</h4>
+          <a href="https://greenvent.us" target="_blank" rel="noopener">greenvent.us</a>
+          <a href="#support">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 Green Vent International LLC. All rights reserved.</span>
+      <span>Professional Ventilation Solutions</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Video modal -->
+<div class="v-modal" id="vModal">
+  <button class="v-close" id="vClose" aria-label="Close video"><i data-lucide="x"></i></button>
+  <div class="frame" id="vFrame"></div>
+</div>
+
+<!-- Hidden iframe target for Google Form submit -->
+<iframe name="gv_gform_sink" id="gformSink" style="display:none" title="form-sink"></iframe>
+
+<script>
+  lucide.createIcons();
+
+  /* ---- Apply config to support details ---- */
+  (function(){
+    const s = GV_CONFIG.support || {};
+    if (s.email){ const e=document.getElementById('sEmail'); e.textContent=s.email; e.href='mailto:'+s.email; }
+    if (s.hours){ document.getElementById('sHours').textContent=s.hours; }
+    if (GV_CONFIG.playlistUrl){
+      const url = GV_CONFIG.playlistUrl;
+      document.getElementById('playlistBtn').href = url;
+      const ch = document.getElementById('channelLink');
+      if (ch) ch.href = url;
+    }
+    const st = GV_CONFIG.stores || {};
+    Object.keys(st).forEach(k=>{ const a=document.getElementById('store-'+k); if(a && st[k]) a.href = st[k]; });
+  })();
+
+  /* ---- Form validation + Google Form submission ---- */
+  const form = document.getElementById('supportForm');
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function setInvalid(id, bad){ document.getElementById(id).classList.toggle('invalid', bad); }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const order = document.getElementById('order').value.trim();
+    const product = document.getElementById('product').value;
+    const topic = document.getElementById('topic').value;
+    const message = document.getElementById('message').value.trim();
+    if (document.getElementById('botcheck').checked) return;
+
+    const bN = !name, bE = !emailRe.test(email), bO = !order;
+    setInvalid('f-name', bN); setInvalid('f-email', bE); setInvalid('f-order', bO);
+    if (bN || bE || bO) {
+      const first = document.querySelector('.field.invalid input');
+      if (first) first.focus();
+      return;
+    }
+
+    // Persist locally as a backup record
+    try {
+      const log = JSON.parse(localStorage.getItem('gv_submissions') || '[]');
+      log.push({ name, email, order, product, topic, at: new Date().toISOString() });
+      localStorage.setItem('gv_submissions', JSON.stringify(log));
+    } catch(_) {}
+
+    // Sync to Google Forms when configured
+    const gf = GV_CONFIG.googleForm;
+    if (gf && gf.formId) {
+      const action = 'https://docs.google.com/forms/d/e/' + gf.formId + '/formResponse';
+      const tmp = document.createElement('form');
+      tmp.action = action; tmp.method = 'POST'; tmp.target = 'gv_gform_sink'; tmp.style.display = 'none';
+      const add = (k,v) => { if(!k) return; const i=document.createElement('input'); i.type='hidden'; i.name=k; i.value=v||''; tmp.appendChild(i); };
+      add(gf.entries.name, name); add(gf.entries.email, email); add(gf.entries.order, order);
+      add(gf.entries.product, product); add(gf.entries.topic, topic);
+      document.body.appendChild(tmp);
+      tmp.submit();
+      setTimeout(()=>tmp.remove(), 1500);
+    }
+
+    // Email the request to support@greenvent.us via Web3Forms
+    const w3 = GV_CONFIG.web3forms;
+    if (w3 && w3.accessKey) {
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: w3.accessKey,
+          subject: '[SERVICE] ' + name + ' – ' + (topic || 'Support request') + ' – ' + order,
+          from_name: 'Green Vent Service Page',
+          replyto: email,
+          name: name, email: email, order_number: order,
+          product: product || '-', topic: topic || '-', message: message || '-',
+          page: location.href
+        })
+      }).catch(()=>{});
+    }
+
+    document.getElementById('formBody').classList.add('hide');
+    const ok = document.getElementById('formSuccess');
+    ok.classList.add('show');
+    lucide.createIcons();
+  });
+
+  // clear invalid state as the user types
+  ['name','email','order'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', ()=> setInvalid('f-'+id, false));
+  });
+
+  /* ---- FAQ accordion ---- */
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const item = btn.closest('.faq-item');
+      const ans = item.querySelector('.faq-a');
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o=>{
+        if (o!==item){ o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight=null; }
+      });
+      item.classList.toggle('open', !open);
+      ans.style.maxHeight = open ? null : ans.scrollHeight + 'px';
+    });
+  });
+
+  /* ---- Video modal ---- */
+  const vModal = document.getElementById('vModal');
+  const vFrame = document.getElementById('vFrame');
+  function openVideo(key){
+    const id = (GV_CONFIG.videos || {})[key];
+    if (id) {
+      vFrame.innerHTML = '<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+    } else {
+      vFrame.innerHTML = '<div class="v-empty" style="display:grid;place-items:center;height:100%"><div><p style="margin:0 0 6px;font-weight:700;font-size:1.25rem">Video coming soon</p><p style="margin:0;opacity:.8">Add your YouTube link in GV_CONFIG.videos.</p></div></div>';
+    }
+    vModal.classList.add('show');
+  }
+  function closeVideo(){ vModal.classList.remove('show'); vFrame.innerHTML=''; }
+  document.querySelectorAll('.video-card').forEach(c=>{
+    if (c.tagName === 'A' || !c.dataset.video) return;
+    c.addEventListener('click', ()=> openVideo(c.dataset.video));
+    // Set thumbnail from YouTube
+    const key = c.dataset.video;
+    const id = (GV_CONFIG.videos || {})[key];
+    if (id) {
+      const img = c.querySelector('.video-thumb img');
+      if (img) {
+        const hq = 'https://img.youtube.com/vi/' + id + '/hqdefault.jpg';
+        const max = 'https://img.youtube.com/vi/' + id + '/maxresdefault.jpg';
+        img.src = max;
+        img.onerror = () => { img.src = hq; img.onerror = null; };
+      }
+    }
+  });
+  document.getElementById('vClose').addEventListener('click', closeVideo);
+  vModal.addEventListener('click', e=>{ if(e.target===vModal) closeVideo(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeVideo(); });
+</script>
+</body>
+</html>
