@@ -299,7 +299,8 @@
         email:   "entry.288440162",
         order:   "entry.1342574313",
         product: "entry.2029115301",
-        topic:   "entry.2015170672"
+        topic:   "entry.2015170672",
+        message: "entry.1591654626"
       }
     },
     // YouTube video IDs — paste your install videos here (just the ID after watch?v=)
@@ -324,9 +325,7 @@
       wayfair: "https://www.wayfair.com/keyword.php?keyword=green+vent+air+vent+cover",
       shop:    "https://shop.app/m/62bdyvur37?dynamicFilterVAvailability=%7B%22available%22%3Atrue%7D&inStock=true&utm_source=shop_app&sortBy=MOST_SALES"
     },
-    support: { email: "support@greenvent.us", hours: "Mon–Fri · 9am–6pm ET" },
-    // Web3Forms: each submission is emailed to support@greenvent.us (empty key = off)
-    web3forms: { accessKey: "" }
+    support: { email: "support@greenvent.us", hours: "Mon–Fri · 9am–6pm ET" }
   };
 </script>
 
@@ -790,28 +789,10 @@
       tmp.action = action; tmp.method = 'POST'; tmp.target = 'gv_gform_sink'; tmp.style.display = 'none';
       const add = (k,v) => { if(!k) return; const i=document.createElement('input'); i.type='hidden'; i.name=k; i.value=v||''; tmp.appendChild(i); };
       add(gf.entries.name, name); add(gf.entries.email, email); add(gf.entries.order, order);
-      add(gf.entries.product, product); add(gf.entries.topic, topic);
+      add(gf.entries.product, product); add(gf.entries.topic, topic); add(gf.entries.message, message);
       document.body.appendChild(tmp);
       tmp.submit();
       setTimeout(()=>tmp.remove(), 1500);
-    }
-
-    // Email the request to support@greenvent.us via Web3Forms
-    const w3 = GV_CONFIG.web3forms;
-    if (w3 && w3.accessKey) {
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          access_key: w3.accessKey,
-          subject: '[SERVICE] ' + name + ' – ' + (topic || 'Support request') + ' – ' + order,
-          from_name: 'Green Vent Service Page',
-          replyto: email,
-          name: name, email: email, order_number: order,
-          product: product || '-', topic: topic || '-', message: message || '-',
-          page: location.href
-        })
-      }).catch(()=>{});
     }
 
     document.getElementById('formBody').classList.add('hide');
